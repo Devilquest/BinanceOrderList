@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31105.61
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinanceOrderList", "BinanceOrderList\BinanceOrderList.csproj", "{4F658E86-7986-45F7-8ABE-9FF4587F8F99}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4F658E86-7986-45F7-8ABE-9FF4587F8F99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F658E86-7986-45F7-8ABE-9FF4587F8F99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F658E86-7986-45F7-8ABE-9FF4587F8F99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F658E86-7986-45F7-8ABE-9FF4587F8F99}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D1BDDEC2-9FDE-41F5-BE7B-93F65D86B8F5}
+	EndGlobalSection
+EndGlobal
