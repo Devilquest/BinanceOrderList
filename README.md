@@ -11,7 +11,7 @@ If you set the Api Key of a Binance account you can retrieve a list of all accou
 Create a [Binance Api Key]((https://www.binance.com/en/support/faq/360002502072)) (Only read permissions are needed)
 - Fill the `Api Key` and `Secret Key` text boxes with the generated Binance Api Key.
 - Optionally you can save the credentials entered for later use by clicking the `Save User` button and giving it a name. *Note: Secret Key is stored as plain text, not encrypted, so be careful.*
-- Set the symbol (trading pair) or a set of symbols (comma separated) you want to search. `E.g., BTCUSDT` or `ETHUSDT, DOGEEUR, ADABTC, LTCETH`
+- Set the symbol (trading pair) or a set of symbols (comma separated) you want to search. E.g., `BTCUSDT` or `ETHUSDT, DOGEEUR, ADABTC, LTCETH`
 - **Options:**
   - **Start Date:** Set the start date of your search. Orders older than specified date will be ignored.
   - **End Date:** Set the end date of your search. Orders newer than specified date will be ignored.
