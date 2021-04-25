@@ -61,6 +61,7 @@ namespace BinanceOrderList
 					{
 						int rowId = int.MinValue;
 						binanceDataDataGridView.Columns["DateColumn"].DefaultCellStyle.Format = "dd/MM/yyyy";
+						binanceDataDataGridView.Columns["UpdateTimeColumn"].DefaultCellStyle.Format = "dd/MM/yyyy";
 
 						foreach (BinanceOrder data in resultDataList)
 						{
@@ -77,17 +78,43 @@ namespace BinanceOrderList
 							row.Cells["DateColumn"].ToolTipText = data.CreateTime.ToString();
 							order.Date = data.CreateTime;
 
+							row.Cells["UpdateTimeColumn"].Value = data.UpdateTime;
+							row.Cells["UpdateTimeColumn"].ToolTipText = data.UpdateTime.ToString();
+							order.UpdateTime = (DateTime) data.UpdateTime;
+
 							row.Cells["PairColumn"].Value = data.Symbol;
 							order.Pair = data.Symbol;
 
 							row.Cells["QuanityColumn"].Value = data.Quantity;
 							order.Quanity = data.Quantity;
 
-							row.Cells["PriceColumn"].Value = data.Price;
+							bool limitTwoDecimals = false;
+
+							foreach (string currency in Constants.LimitTwoDecimalsCurrencies)
+								if (data.Symbol.EndsWith(currency))
+								{
+									limitTwoDecimals = true;
+									break;
+								}
+
+							if (limitTwoDecimals)
+								row.Cells["PriceColumn"].Value = Math.Round(data.Price, 2);
+							else
+								row.Cells["PriceColumn"].Value = data.Price;
 							order.Price = data.Price;
 
-							row.Cells["StatusColumn"].Value = data.Status;
-							order.Status = data.Status;
+							if (data.Status == OrderStatus.Filled && data.QuantityFilled < data.Quantity)
+							{
+								decimal filledPercent = Math.Round((data.QuantityFilled / data.Quantity) * 100, 0);
+								row.Cells["StatusColumn"].Value = data.Status + " (" + filledPercent + "%)";
+								row.Cells["StatusColumn"].ToolTipText = "Filled: " + data.QuantityFilled.ToString();
+								order.Status = data.Status + " (" + filledPercent + "% - " + data.QuantityFilled + ")"; 
+							}
+							else
+							{
+								row.Cells["StatusColumn"].Value = data.Status;
+								order.Status = data.Status.ToString();
+							}
 
 							row.Cells["TypeColumn"].Value = data.Type;
 							order.Type = data.Type;
@@ -169,12 +196,13 @@ namespace BinanceOrderList
 					for (int i = 0; i < orderList.Count; i++)
 					{
 						worksheet.Cell(i + 2, 1).Value = orderList[i].Date;
-						worksheet.Cell(i + 2, 2).Value = orderList[i].Pair;
-						worksheet.Cell(i + 2, 3).Value = orderList[i].Quanity;
-						worksheet.Cell(i + 2, 4).Value = orderList[i].Price;
-						worksheet.Cell(i + 2, 5).Value = orderList[i].Status;
-						worksheet.Cell(i + 2, 6).Value = orderList[i].Type;
-						worksheet.Cell(i + 2, 7).Value = orderList[i].Side;
+						worksheet.Cell(i + 2, 2).Value = orderList[i].UpdateTime;
+						worksheet.Cell(i + 2, 3).Value = orderList[i].Pair;
+						worksheet.Cell(i + 2, 4).Value = orderList[i].Quanity;
+						worksheet.Cell(i + 2, 5).Value = orderList[i].Price;
+						worksheet.Cell(i + 2, 6).Value = orderList[i].Status;
+						worksheet.Cell(i + 2, 7).Value = orderList[i].Type;
+						worksheet.Cell(i + 2, 8).Value = orderList[i].Side;
 					}
 
 					worksheet.Columns(1, binanceDataDataGridView.ColumnCount).AdjustToContents(12d, 35d);
@@ -203,10 +231,11 @@ namespace BinanceOrderList
 	public struct Order
 	{
 		public DateTime Date { get; set; }
+		public DateTime UpdateTime { get; set; }
 		public string Pair { get; set; }
 		public decimal Quanity { get; set; }
 		public decimal Price { get; set; }
-		public OrderStatus Status { get; set; }
+		public string Status { get; set; }
 		public OrderType Type { get; set; }
 		public OrderSide Side { get; set; }
 	}

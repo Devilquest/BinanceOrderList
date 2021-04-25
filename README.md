@@ -21,6 +21,12 @@ Create a [Binance Api Key]((https://www.binance.com/en/support/faq/360002502072)
 ## Usage
 Once configured just click the `Search` button. If, for the given parameters, some data is found. A window with those data will appear. Then you can export the data to an Excel spreadsheet by clicking the `Export to Excel` button.
 
+## Changelog
+- **v1.1.0 - 25/04/2021**
+  - Added `Update Time` column to the search result grid view to display the order last update date and time.
+  - Price is rounded to two decimal places for USDT, USD and EUR. Or the ones specified on the `LimitTwoDecimalsCurrencies` constant.
+  - Added the percentage filled of filled orders for non-fully filled orders. Also adds the quantity filled when exported to Excel.
+
 <br>
 
 ------------

@@ -8,6 +8,7 @@
 		public static int MinimumPairSymboLength { get; } = 5;
 		public static int MinimumUsernameLength { get; } = 3;
 		public static int MaximumUsernameLength { get; } = 25;
+		public static string[] LimitTwoDecimalsCurrencies { get; } = { "USDT", "USD", "EUR"};
 
 		//UI Strings
 		public static string PublicApiKeyTextBoxPlaceholder { get; } = "API Key";
