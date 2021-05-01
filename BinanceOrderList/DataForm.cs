@@ -85,11 +85,13 @@ namespace BinanceOrderList
 							row.Cells["PairColumn"].Value = data.Symbol;
 							order.Pair = data.Symbol;
 
-							row.Cells["QuanityColumn"].Value = data.Quantity;
+							if (data.Quantity > 1)
+								row.Cells["QuanityColumn"].Value = data.Quantity.ToString("0.#############################");
+							else
+								row.Cells["QuanityColumn"].Value = data.Quantity;
 							order.Quanity = data.Quantity;
 
 							bool limitTwoDecimals = false;
-
 							foreach (string currency in Constants.LimitTwoDecimalsCurrencies)
 								if (data.Symbol.EndsWith(currency))
 								{
