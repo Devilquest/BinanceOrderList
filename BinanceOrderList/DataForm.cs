@@ -105,7 +105,7 @@ namespace BinanceOrderList
 								row.Cells["PriceColumn"].Value = data.Price;
 							order.Price = data.Price;
 
-							if (data.Status == OrderStatus.Filled && data.QuantityFilled < data.Quantity)
+							if (data.Status == OrderStatus.PartiallyFilled)
 							{
 								decimal filledPercent = Math.Round((data.QuantityFilled / data.Quantity) * 100, 0);
 								row.Cells["StatusColumn"].Value = data.Status + " (" + filledPercent + "%)";
